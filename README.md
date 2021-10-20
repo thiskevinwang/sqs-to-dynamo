@@ -4,20 +4,32 @@
 
 ---
 
-# Welcome to your CDK TypeScript project!
+# This project was created using CDK for TypeScript
 
-This is a blank project for TypeScript development with CDK.
+## Prerequisites
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+`cdk bootstrap aws://<ACCOUNT_NUMBER>/<AWS_REGION>`
 
-## Useful commands
 
-- `npm run build` compile typescript to js
-- `npm run watch` watch for changes and compile
-- `npm run test` perform the jest unit tests
-- `cdk deploy` deploy this stack to your default AWS account/region
-- `cdk diff` compare deployed stack with current state
-- `cdk synth` emits the synthesized CloudFormation template
+## Quickstart
+
+- `touch .env`
+- `npx cdk deploy`  
+
+## Running scripts
+- `npx ts-node ./scripts/burst_db.ts 20000`
+- `npx ts-node ./scripts/burst_queue.ts 20000`
+
+
+## CDK Commands
+
+- `npx cdk synth` emits the synthesized CloudFormation template
+- `npx cdk diff` compare deployed stack with current state
+- `npx cdk deploy` deploy this stack to your default AWS account/region
+- `npx cdk destroy` delete all provisioned resource (removal policies may prevent deletion in some cases)
+
+
+
 
 ## Notes
 
