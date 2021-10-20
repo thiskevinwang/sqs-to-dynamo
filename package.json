@@ -36,7 +36,6 @@
     "@aws-sdk/client-sqs": "^3.37.0",
     "@aws-sdk/lib-dynamodb": "^3.37.0",
     "@aws-sdk/middleware-retry": "^3.37.0",
-    "dotenv": "^10.0.0",
     "source-map-support": "^0.5.16"
   }
 }
