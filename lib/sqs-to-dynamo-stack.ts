@@ -52,15 +52,7 @@ export class SqsToDynamoStack extends cdk.Stack {
     queue.grantConsumeMessages(fn);
     table.grantReadWriteData(fn);
 
-    new cdk.CfnOutput(this, "QUEUE_NAME", { value: queue.queueName });
-    new cdk.CfnOutput(this, "QUEUE_URL", { value: queue.queueUrl });
-
-    new cdk.CfnOutput(this, "DL_QUEUE_NAME", { value: dlQueue.queueName });
-    new cdk.CfnOutput(this, "DL_QUEUE_URL", { value: dlQueue.queueUrl });
-
-    new cdk.CfnOutput(this, "TABLE_NAME", { value: table.tableName });
-    new cdk.CfnOutput(this, "FUNCTION_NAME", { value: fn.functionName });
-
-    new cdk.CfnOutput(this, "EVENT_SOURCE_MAPPING_ID", { value: eventSource.eventSourceMappingId });
+    new cdk.CfnOutput(this, "queueUrl", { value: queue.queueUrl });
+    new cdk.CfnOutput(this, "tableName", { value: table.tableName });
   }
 }
