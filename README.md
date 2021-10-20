@@ -10,26 +10,22 @@
 
 `cdk bootstrap aws://<ACCOUNT_NUMBER>/<AWS_REGION>`
 
-
 ## Quickstart
 
 - `touch .env`
-- `npx cdk deploy`  
+- `npx cdk deploy --outputs-file ./cdk-outputs.json`
 
 ## Running scripts
+
 - `npx ts-node ./scripts/burst_db.ts 20000`
 - `npx ts-node ./scripts/burst_queue.ts 20000`
-
 
 ## CDK Commands
 
 - `npx cdk synth` emits the synthesized CloudFormation template
 - `npx cdk diff` compare deployed stack with current state
-- `npx cdk deploy` deploy this stack to your default AWS account/region
+- `npx cdk deploy --outputs-file ./cdk-outputs.json` deploy this stack to your default AWS account/region
 - `npx cdk destroy` delete all provisioned resource (removal policies may prevent deletion in some cases)
-
-
-
 
 ## Notes
 
