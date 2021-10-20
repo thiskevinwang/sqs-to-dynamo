@@ -1,3 +1,7 @@
+import * as readline from "readline";
+import * as process from "process";
+import * as chalk from "chalk";
+
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, UpdateCommand } from "@aws-sdk/lib-dynamodb";
 
@@ -29,9 +33,11 @@ const main = async () => {
   }
   count = parseInt(count);
 
-  console.log(`Sending ${count} operations to DDB...`);
+  console.log(chalk.gray(`🚀 Sending ${count} operations to DDB...`));
 
+  let itemCount = 0;
   let errorCount = 0;
+  let err: Error | null = null;
 
   try {
     const updateCommand = new UpdateCommand({
@@ -42,20 +48,31 @@ const main = async () => {
       ExpressionAttributeValues: { ":incr": 1, ":zero": 0 },
     });
 
-    const proms = Array(count)
+    const commands = Array(count)
       .fill(null)
-      .map(() =>
-        docClient.send(updateCommand).catch((e) => {
-          errorCount += 1;
-        })
-      );
+      .map((_, __, arr) => {
+        return docClient
+          .send(updateCommand)
+          .catch((e) => {
+            errorCount += 1;
+            err = e; // grab any error to be printed
+          })
+          .finally(() => {
+            itemCount += 1;
+            readline.cursorTo(process.stdout, 0);
+            process.stdout.write(
+              `Progress: ${chalk.yellow(itemCount)}/${chalk.blue(arr.length)}, Errors: ${chalk.red(
+                errorCount
+              )}`
+            );
+            if (itemCount === arr.length) process.stdout.write("\n");
+          });
+      });
 
-    await Promise.all(proms);
-  } catch (err) {
-    console.log(err);
+    await Promise.all(commands);
   } finally {
-    console.log("Exiting....");
-    console.log("Error Count:", errorCount);
+    err && console.error(err);
+    console.log(chalk.green("✨ Done"));
   }
 };
 
