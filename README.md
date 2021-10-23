@@ -12,7 +12,6 @@
 
 ## Quickstart
 
-- `touch .env`
 - `npx cdk deploy --outputs-file ./cdk-outputs.json`
 
 ## Running scripts
